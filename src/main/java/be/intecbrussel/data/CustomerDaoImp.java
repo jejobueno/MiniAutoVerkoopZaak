@@ -1,6 +1,6 @@
 package be.intecbrussel.data;
 
-import be.intecbrussel.models.Customer;
+import be.intecbrussel.entities.Customer;
 
 import javax.persistence.*;
 import java.util.stream.Stream;
@@ -26,12 +26,13 @@ public class CustomerDaoImp implements CustomerDao{
         } catch (PersistenceException pex){
             pex.printStackTrace();
         } finally {
-            if (emf != null){
-                emf.close();
-            }
             if (em != null){
                 em.close();
             }
+            if (emf != null){
+                emf.close();
+            }
+
         }
     }
 
@@ -58,11 +59,11 @@ public class CustomerDaoImp implements CustomerDao{
         } catch (PersistenceException pex){
             pex.printStackTrace();
         } finally {
-            if (emf != null){
-                emf.close();
-            }
             if (em != null){
                 em.close();
+            }
+            if (emf != null){
+                emf.close();
             }
         }
         return customerToRead;
@@ -88,11 +89,11 @@ public class CustomerDaoImp implements CustomerDao{
         } catch (PersistenceException pex){
             pex.printStackTrace();
         } finally {
-            if (emf != null){
-                emf.close();
-            }
             if (em != null){
                 em.close();
+            }
+            if (emf != null){
+                emf.close();
             }
         }
         return customerToRead;
@@ -130,11 +131,11 @@ public class CustomerDaoImp implements CustomerDao{
         } catch (PersistenceException pex){
             pex.printStackTrace();
         } finally {
-            if (emf != null){
-                emf.close();
-            }
             if (em != null){
                 em.close();
+            }
+            if (emf != null){
+                emf.close();
             }
         }
     }
@@ -159,11 +160,11 @@ public class CustomerDaoImp implements CustomerDao{
         } catch (PersistenceException pex){
             pex.printStackTrace();
         } finally {
-            if (emf != null){
-                emf.close();
-            }
             if (em != null){
                 em.close();
+            }
+            if (emf != null){
+                emf.close();
             }
         }
     }

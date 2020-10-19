@@ -1,4 +1,4 @@
-package be.intecbrussel.models;
+package be.intecbrussel.entities;
 
 public enum JobTitle {
 

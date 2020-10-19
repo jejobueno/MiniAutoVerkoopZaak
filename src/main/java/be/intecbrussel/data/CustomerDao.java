@@ -1,6 +1,6 @@
 package be.intecbrussel.data;
 
-import be.intecbrussel.models.Customer;
+import be.intecbrussel.entities.Customer;
 
 public interface CustomerDao {
 

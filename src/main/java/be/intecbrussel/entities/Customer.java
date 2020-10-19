@@ -1,4 +1,4 @@
-package be.intecbrussel.models;
+package be.intecbrussel.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int customerNumber;
     private String customerName;
     private String contactLastName;
@@ -20,13 +20,15 @@ public class Customer {
     private String state;
     private String country;
     private String postalCode;
-    private int salesRepEmployeeNumber;
+    @ManyToOne
+    @JoinColumn(name = "salesRepEmployeeNumber")
+    private Employee salesRepEmployeeNumber;
     private double creditLimit;
 
     public Customer() {
     }
 
-    public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, int salesRepEmployeeNumber, double creditLimit) {
+    public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, Employee salesRepEmployeeNumber, double creditLimit) {
         this.customerNumber = customerNumber;
         this.customerName = customerName;
         this.contactLastName = contactLastName;
@@ -42,7 +44,6 @@ public class Customer {
         this.creditLimit = creditLimit;
     }
 
-    @Id
     public int getCustomerNumber() {
         return customerNumber;
     }
@@ -83,7 +84,7 @@ public class Customer {
         return postalCode;
     }
 
-    public int getSalesRepEmployeeNumber() {
+    public Employee getSalesRepEmployeeNumber() {
         return salesRepEmployeeNumber;
     }
 
@@ -139,7 +140,7 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-    public void setSalesRepEmployeeNumber(int salesRepEmployeeNumber) {
+    public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
         this.salesRepEmployeeNumber = salesRepEmployeeNumber;
     }
 
@@ -186,7 +187,7 @@ public class Customer {
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", salesRepEmployeeNumber=" + salesRepEmployeeNumber +
+                ", salesRepEmployeeNumber=" + salesRepEmployeeNumber.getEmployeeNumber() +
                 ", creditLimit=" + creditLimit +
                 '}';
     }

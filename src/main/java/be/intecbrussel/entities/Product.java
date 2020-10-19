@@ -1,8 +1,7 @@
-package be.intecbrussel.models;
+package be.intecbrussel.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity

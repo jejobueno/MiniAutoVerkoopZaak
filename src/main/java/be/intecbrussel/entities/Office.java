@@ -1,6 +1,4 @@
-package be.intecbrussel.models;
-
-import org.springframework.data.relational.core.mapping.Embedded;
+package be.intecbrussel.entities;
 
 import javax.persistence.*;
 import java.util.Objects;

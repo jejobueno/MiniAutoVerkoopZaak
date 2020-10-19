@@ -1,6 +1,6 @@
 package be.intecbrussel.testapps;
 
-import be.intecbrussel.models.Customer;
+import be.intecbrussel.entities.Customer;
 import be.intecbrussel.data.CustomerDaoImp;
 
 public class testCustomer {
@@ -12,7 +12,7 @@ public class testCustomer {
 
         CustomerDaoImp customerApp = new CustomerDaoImp();
 
-        customer = customerApp.readCustomer("Atelier graphique");
+        customer = customerApp.readCustomer(103);
         customer.setCustomerName("AJDH");
         System.out.println(customer);
         customer.setCustomerNumber(0);

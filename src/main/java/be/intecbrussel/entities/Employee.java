@@ -1,11 +1,13 @@
-package be.intecbrussel.models;
+package be.intecbrussel.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-public class Employees {
+@Table(name = "employees")
+public class Employee {
 
     @Id
     private int employeeNumber;
@@ -17,10 +19,10 @@ public class Employees {
     private int reportsTo;
     private JobTitle jobTitle;
 
-    public Employees() {
+    public Employee() {
     }
 
-    public Employees(int employeeNumber, String lastName, String firstName, String extension, String email, int officeCode, int reportsTo, JobTitle jobTitle) {
+    public Employee(int employeeNumber, String lastName, String firstName, String extension, String email, int officeCode, int reportsTo, JobTitle jobTitle) {
         this.employeeNumber = employeeNumber;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -99,7 +101,7 @@ public class Employees {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employees employees = (Employees) o;
+        Employee employees = (Employee) o;
         return employeeNumber == employees.employeeNumber &&
                 officeCode == employees.officeCode &&
                 reportsTo == employees.reportsTo &&
