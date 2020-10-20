@@ -28,7 +28,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, Employee salesRepEmployeeNumber, double creditLimit) {
+    public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, double creditLimit) {
         this.customerNumber = customerNumber;
         this.customerName = customerName;
         this.contactLastName = contactLastName;
@@ -40,7 +40,6 @@ public class Customer {
         this.state = state;
         this.country = country;
         this.postalCode = postalCode;
-        this.salesRepEmployeeNumber = salesRepEmployeeNumber;
         this.creditLimit = creditLimit;
     }
 
@@ -187,7 +186,7 @@ public class Customer {
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", salesRepEmployeeNumber=" + salesRepEmployeeNumber.getEmployeeNumber() +
+                ", salesRepEmployeeNumber=" + salesRepEmployeeNumber +
                 ", creditLimit=" + creditLimit +
                 '}';
     }

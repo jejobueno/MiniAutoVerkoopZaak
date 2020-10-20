@@ -1,15 +1,17 @@
 package be.intecbrussel.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import be.intecbrussel.enums.JobTitle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int employeeNumber;
     private String lastName;
     private String firstName;
@@ -19,11 +21,10 @@ public class Employee {
     private int reportsTo;
     private JobTitle jobTitle;
 
-    public Employee() {
+        public Employee() {
     }
 
-    public Employee(int employeeNumber, String lastName, String firstName, String extension, String email, int officeCode, int reportsTo, JobTitle jobTitle) {
-        this.employeeNumber = employeeNumber;
+    public Employee(String lastName, String firstName, String extension, String email, int officeCode, int reportsTo, JobTitle jobTitle) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.extension = extension;

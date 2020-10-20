@@ -9,16 +9,9 @@ public class testCustomer {
 
         Customer customer = new Customer();
 
-
         CustomerDaoImp customerApp = new CustomerDaoImp();
-
-        customer = customerApp.readCustomer(103);
-        customer.setCustomerName("AJDH");
+        customer = customerApp.readCustomer(242);
         System.out.println(customer);
-        customer.setCustomerNumber(0);
-        //customerApp.createCustomer(customer);
-        customerApp.deleteCustomer(customer);
-
     }
 
 

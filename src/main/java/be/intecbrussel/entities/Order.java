@@ -1,5 +1,7 @@
 package be.intecbrussel.entities;
 
+import be.intecbrussel.enums.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;

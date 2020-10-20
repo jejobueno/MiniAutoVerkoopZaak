@@ -81,7 +81,7 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            em.find(Customer.class,customerNumber);
+            customerToRead = em.find(Customer.class,customerNumber);
             transaction.commit();
 
             System.out.println(customerToRead + " readed");

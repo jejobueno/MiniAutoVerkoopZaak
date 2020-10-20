@@ -1,4 +1,4 @@
-package be.intecbrussel.entities;
+package be.intecbrussel.enums;
 
 public enum Status {
 
