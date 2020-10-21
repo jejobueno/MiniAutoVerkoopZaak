@@ -4,18 +4,19 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "productlines")
 public class ProductLine {
 
     @Id
     private String productLine;
     private String textDescription;
     private String htmlDescription;
-    private String image;
+    private byte[] image;
 
     public ProductLine() {
     }
 
-    public ProductLine(String productLine, String textDescription, String htmlDescription, String image) {
+    public ProductLine(String productLine, String textDescription, String htmlDescription, byte[] image) {
         this.productLine = productLine;
         this.textDescription = textDescription;
         this.htmlDescription = htmlDescription;
@@ -34,7 +35,7 @@ public class ProductLine {
         this.htmlDescription = htmlDescription;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -51,7 +52,7 @@ public class ProductLine {
         return htmlDescription;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 

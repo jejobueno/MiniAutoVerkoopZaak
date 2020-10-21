@@ -98,13 +98,13 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return customerNumber == order.customerNumber &&
-                Objects.equals(orderNumber, order.orderNumber) &&
+        return orderNumber == order.orderNumber &&
                 Objects.equals(orderDate, order.orderDate) &&
                 Objects.equals(requiredDate, order.requiredDate) &&
                 Objects.equals(shippedDate, order.shippedDate) &&
                 status == order.status &&
-                Objects.equals(comments, order.comments);
+                Objects.equals(comments, order.comments) &&
+                Objects.equals(customerNumber, order.customerNumber);
     }
 
     @Override

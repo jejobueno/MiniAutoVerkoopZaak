@@ -2,12 +2,21 @@ package be.intecbrussel.entities;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 @Entity
+@Table(name = "orderdetails")
+@IdClass(OrderDetailPK.class)
 public class OrderDetail {
 
     @Id
-    private int orderNumber;
-    private String productCode;
+    @ManyToOne
+    @JoinColumn(name = "orderNumber")
+    private Order order;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "productCode")
+    private Product product;
     private int quantityOrdered;
     private double priceEach;
     private int orderLineNumber;
@@ -15,20 +24,20 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderNumber, String productCode, int quantityOrdered, double priceEach, int orderLineNumber) {
-        this.orderNumber = orderNumber;
-        this.productCode = productCode;
+    public OrderDetail(Order orderNumber, Product productCode, int quantityOrdered, double priceEach, int orderLineNumber) {
+        this.order = orderNumber;
+        this.product = productCode;
         this.quantityOrdered = quantityOrdered;
         this.priceEach = priceEach;
         this.orderLineNumber = orderLineNumber;
     }
 
-    public long getOrderNumber() {
-        return orderNumber;
+    public Order getOrder() {
+        return order;
     }
 
-    public String getProductCode() {
-        return productCode;
+    public Product getProduct() {
+        return product;
     }
 
     public int getQuantityOrdered() {
@@ -43,12 +52,12 @@ public class OrderDetail {
         return orderLineNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrder(Order orderNumber) {
+        this.order = orderNumber;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setProduct(Product productCode) {
+        this.product = productCode;
     }
 
     public void setQuantityOrdered(int quantityOrdered) {
@@ -61,5 +70,33 @@ public class OrderDetail {
 
     public void setOrderLineNumber(int orderLineNumber) {
         this.orderLineNumber = orderLineNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetail that = (OrderDetail) o;
+        return quantityOrdered == that.quantityOrdered &&
+                Double.compare(that.priceEach, priceEach) == 0 &&
+                orderLineNumber == that.orderLineNumber &&
+                Objects.equals(order, that.order) &&
+                Objects.equals(product, that.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(order, product, quantityOrdered, priceEach, orderLineNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "orderNumber=" + order +
+                ", productCode=" + product +
+                ", quantityOrdered=" + quantityOrdered +
+                ", priceEach=" + priceEach +
+                ", orderLineNumber=" + orderLineNumber +
+                '}';
     }
 }

@@ -1,16 +1,18 @@
 package be.intecbrussel.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
     private String productCode;
     private String productName;
-    private String productLines;
+    @ManyToOne
+    @JoinColumn(name = "productLine")
+    private ProductLine productLine;
     private String productScale;
     private String productVendor;
     private String productDescription;
@@ -21,10 +23,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productCode, String productName, String productLines, String productScale, String productVendor, String productDescription, int quantityInStock, double buyPrice, double MSRP) {
+    public Product(String productCode, String productName, ProductLine productLine, String productScale, String productVendor, String productDescription, int quantityInStock, double buyPrice, double MSRP) {
         this.productCode = productCode;
         this.productName = productName;
-        this.productLines = productLines;
+        this.productLine = productLine;
         this.productScale = productScale;
         this.productVendor = productVendor;
         this.productDescription = productDescription;
@@ -41,8 +43,8 @@ public class Product {
         this.productName = productName;
     }
 
-    public void setProductLines(String productLines) {
-        this.productLines = productLines;
+    public void setProductLine(ProductLine productLine) {
+        this.productLine = productLine;
     }
 
     public void setProductScale(String productScale) {
@@ -69,7 +71,6 @@ public class Product {
         this.MSRP = MSRP;
     }
 
-    @Id
     public String getProductCode() {
         return productCode;
     }
@@ -78,8 +79,8 @@ public class Product {
         return productName;
     }
 
-    public String getProductLines() {
-        return productLines;
+    public ProductLine getProductLine() {
+        return productLine;
     }
 
     public String getProductScale() {
@@ -94,7 +95,7 @@ public class Product {
         return productDescription;
     }
 
-    public long getQuantityInStock() {
+    public int getQuantityInStock() {
         return quantityInStock;
     }
 
@@ -116,7 +117,7 @@ public class Product {
                 Double.compare(products.MSRP, MSRP) == 0 &&
                 Objects.equals(productCode, products.productCode) &&
                 Objects.equals(productName, products.productName) &&
-                Objects.equals(productLines, products.productLines) &&
+                Objects.equals(productLine, products.productLine) &&
                 Objects.equals(productScale, products.productScale) &&
                 Objects.equals(productVendor, products.productVendor) &&
                 Objects.equals(productDescription, products.productDescription);
@@ -124,7 +125,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(productCode, productName, productLines, productScale, productVendor, productDescription, quantityInStock, buyPrice, MSRP);
+        return Objects.hash(productCode, productName, productLine, productScale, productVendor, productDescription, quantityInStock, buyPrice, MSRP);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class Product {
         return "products{" +
                 "productCode='" + productCode + '\'' +
                 ", productName='" + productName + '\'' +
-                ", productLines=" + productLines +
+                ", productLine=" + productLine +
                 ", productScale='" + productScale + '\'' +
                 ", productVendor='" + productVendor + '\'' +
                 ", productDescription='" + productDescription + '\'' +
