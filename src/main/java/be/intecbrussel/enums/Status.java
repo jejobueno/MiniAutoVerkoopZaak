@@ -2,11 +2,25 @@ package be.intecbrussel.enums;
 
 public enum Status {
 
-    SHIPPED,
-    RESOLVED,
-    CANCELLED,
-    ON_HOLD,
-    DISPUTED,
-    IN_PROCESS
+    SHIPPED("Shipped"),
+    RESOLVED("Resolved"),
+    CANCELLED("Cancelled"),
+    ON_HOLD("On Hold"),
+    DISPUTED("Disputed"),
+    IN_PROCESS("In Process");
 
+    private String status;
+
+    Status(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    @Override
+    public String toString() {
+        return status;
+    }
 }

@@ -1,5 +1,6 @@
 package be.intecbrussel.entities;
 
+import be.intecbrussel.enums.Status;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,14 +18,17 @@ public class Order {
     private LocalDate orderDate;
     private LocalDate requiredDate;
     private LocalDate shippedDate;
-    private String status;
+    private Status status;
     private String comments;
-    private int customerNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "customerNumber")
+    private Customer customerNumber;
 
     public Order() {
     }
 
-    public Order(LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status, String comments, int customerNumber) {
+    public Order(LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, Status status, String comments, Customer customerNumber) {
         this.orderDate = orderDate;
         this.requiredDate = requiredDate;
         this.shippedDate = shippedDate;
@@ -49,7 +53,7 @@ public class Order {
         return shippedDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -57,7 +61,7 @@ public class Order {
         return comments;
     }
 
-    public int getCustomerNumber() {
+    public Customer getCustomerNumber() {
         return customerNumber;
     }
 
@@ -77,7 +81,7 @@ public class Order {
         this.shippedDate = shippedDate;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -85,7 +89,7 @@ public class Order {
         this.comments = comments;
     }
 
-    public void setCustomerNumber(int customerNumber) {
+    public void setCustomerNumber(Customer customerNumber) {
         this.customerNumber = customerNumber;
     }
 

@@ -1,8 +1,5 @@
 package be.intecbrussel.enums;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 public enum JobTitle {
 
     PRESIDENT("President"),
@@ -15,7 +12,7 @@ public enum JobTitle {
 
     private String title;
 
-    private JobTitle(String title) {
+    JobTitle(String title) {
         this.title = title;
     }
 
