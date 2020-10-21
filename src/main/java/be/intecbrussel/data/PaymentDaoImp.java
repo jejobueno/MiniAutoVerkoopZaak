@@ -1,8 +1,6 @@
 package be.intecbrussel.data;
 
 import be.intecbrussel.entities.Payment;
-import be.intecbrussel.entities.Product;
-import be.intecbrussel.entities.ProductLine;
 
 import javax.persistence.*;
 

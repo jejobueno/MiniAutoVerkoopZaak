@@ -8,7 +8,7 @@ public interface OrderDetailsDao {
 
     void createOrderDetail(OrderDetail orderDetail);
     OrderDetail readOrderDetail(Order order,Product product);
-    void updateOrderDetail(Product product);
+    void updateOrderDetail(OrderDetail orderDetail);
     void deleteOrderDetail(OrderDetail orderDetail);
 
 }

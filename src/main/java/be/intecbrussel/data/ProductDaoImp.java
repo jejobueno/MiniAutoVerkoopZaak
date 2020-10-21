@@ -122,6 +122,7 @@ public class ProductDaoImp implements ProductDao {
             productToUpdate.setMSRP(product.getMSRP());
             transaction.commit();
 
+
             System.out.println(product + " updated");
 
         } catch (PersistenceException pex){
@@ -152,7 +153,7 @@ public class ProductDaoImp implements ProductDao {
             em.remove(productToDelete);
             transaction.commit();
 
-            System.out.println(productToDelete + " saved");
+            System.out.println(productToDelete + " deleted");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
