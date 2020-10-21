@@ -1,6 +1,7 @@
 package be.intecbrussel.entities;
 
 import be.intecbrussel.enums.JobTitle;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,20 +12,25 @@ import java.util.Objects;
 public class Employee implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
     private int employeeNumber;
     private String lastName;
     private String firstName;
     private String extension;
     private String email;
-    private int officeCode;
-    private int reportsTo;
+    @ManyToOne
+    @JoinColumn(name = "officeCode")
+    private Office officeCode;
+    @ManyToOne
+    @JoinColumn(name = "reportsTo")
+    private Employee reportsTo;
     private JobTitle jobTitle;
 
         public Employee() {
     }
 
-    public Employee(String lastName, String firstName, String extension, String email, int officeCode, int reportsTo, JobTitle jobTitle) {
+    public Employee(String lastName, String firstName, String extension, String email, Office officeCode, Employee reportsTo, JobTitle jobTitle) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.extension = extension;
@@ -54,11 +60,11 @@ public class Employee implements Serializable {
         return email;
     }
 
-    public int getOfficeCode() {
+    public Office getOfficeCode() {
         return officeCode;
     }
 
-    public int getReportsTo() {
+    public Employee getReportsTo() {
         return reportsTo;
     }
 
@@ -86,11 +92,11 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public void setOfficeCode(int officeCode) {
+    public void setOfficeCode(Office officeCode) {
         this.officeCode = officeCode;
     }
 
-    public void setReportsTo(int reportsTo) {
+    public void setReportsTo(Employee reportsTo) {
         this.reportsTo = reportsTo;
     }
 

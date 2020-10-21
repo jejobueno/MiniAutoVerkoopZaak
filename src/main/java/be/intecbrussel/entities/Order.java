@@ -1,28 +1,30 @@
 package be.intecbrussel.entities;
 
-import be.intecbrussel.enums.Status;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
-    private int oderNumber;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private int orderNumber;
     private LocalDate orderDate;
     private LocalDate requiredDate;
     private LocalDate shippedDate;
-    private Status status;
+    private String status;
     private String comments;
     private int customerNumber;
 
     public Order() {
     }
 
-    public Order(int oderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, Status status, String comments, int customerNumber) {
-        this.oderNumber = oderNumber;
+    public Order(LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status, String comments, int customerNumber) {
         this.orderDate = orderDate;
         this.requiredDate = requiredDate;
         this.shippedDate = shippedDate;
@@ -31,9 +33,8 @@ public class Order {
         this.customerNumber = customerNumber;
     }
 
-    @Id
     public int getOderNumber() {
-        return oderNumber;
+        return orderNumber;
     }
 
     public LocalDate getOrderDate() {
@@ -48,7 +49,7 @@ public class Order {
         return shippedDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -61,7 +62,7 @@ public class Order {
     }
 
     public void setOderNumber(int oderNumber) {
-        this.oderNumber = oderNumber;
+        this.orderNumber = oderNumber;
     }
 
     public void setOrderDate(LocalDate orderDate) {
@@ -76,7 +77,7 @@ public class Order {
         this.shippedDate = shippedDate;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -94,7 +95,7 @@ public class Order {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return customerNumber == order.customerNumber &&
-                Objects.equals(oderNumber, order.oderNumber) &&
+                Objects.equals(orderNumber, order.orderNumber) &&
                 Objects.equals(orderDate, order.orderDate) &&
                 Objects.equals(requiredDate, order.requiredDate) &&
                 Objects.equals(shippedDate, order.shippedDate) &&
@@ -104,13 +105,13 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(oderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber);
+        return Objects.hash(orderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber);
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "oderNumber='" + oderNumber + '\'' +
+                "oderNumber='" + orderNumber + '\'' +
                 ", orderDate=" + orderDate +
                 ", requiredDate=" + requiredDate +
                 ", shippedDate=" + shippedDate +

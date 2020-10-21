@@ -1,12 +1,17 @@
 package be.intecbrussel.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "offices")
 public class Office {
 
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private int officeCode;
     private String city;
     private String phone;
@@ -20,7 +25,7 @@ public class Office {
     public Office() {
     }
 
-    public Office(int officeCode, String city, String phone, String addressLine1, String addressLine2, String state, String country, String postalCode, String territory) {
+    public Office(String city, String phone, String addressLine1, String addressLine2, String state, String country, String postalCode, String territory) {
         this.officeCode = officeCode;
         this.city = city;
         this.phone = phone;

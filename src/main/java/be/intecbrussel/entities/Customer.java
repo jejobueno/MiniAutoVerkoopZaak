@@ -1,5 +1,7 @@
 package be.intecbrussel.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,7 +10,8 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
     private int customerNumber;
     private String customerName;
     private String contactLastName;
@@ -28,8 +31,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, double creditLimit) {
-        this.customerNumber = customerNumber;
+    public Customer(String customerName, String contactLastName, String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state, String country, String postalCode, double creditLimit) {
         this.customerName = customerName;
         this.contactLastName = contactLastName;
         this.contactFirstName = contactFirstName;

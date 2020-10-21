@@ -22,13 +22,13 @@ public class JobTitleConverter implements AttributeConverter<JobTitle,String> {
                 return JobTitle.PRESIDENT;
             case "Sales Manager (APAC)":
                 return JobTitle.SALES_MANAGER_APAC;
-            case "Sales Manager (EMEA)":
+            case "Sale Manager (EMEA)":
                 return JobTitle.SALES_MANAGER_EMEA;
             case "Sales Manager (NA)":
                 return JobTitle.SALES_MANAGER_NA;
-            case "Vp Marketing":
+            case "VP Marketing":
                 return JobTitle.VP_MARKETING;
-            case "VP sales":
+            case "VP Sales":
                 return JobTitle.VP_SALES;
             default:
                 throw new IllegalArgumentException("Job title [" + dbData + "] not suported");

@@ -1,14 +1,15 @@
 package be.intecbrussel.data;
 
 import be.intecbrussel.entities.Customer;
+import be.intecbrussel.entities.Employee;
 
 import javax.persistence.*;
 import java.util.stream.Stream;
 
-public class CustomerDaoImp implements CustomerDao{
+public class EmployeeDaoImp implements EmployeeDao {
 
     @Override
-    public void createCustomer(Customer customer) {
+    public void createEmployee(Employee employee) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
 
@@ -18,10 +19,10 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            em.persist(customer);
+            em.persist(employee);
             transaction.commit();
 
-            System.out.println(customer + " saved");
+            System.out.println(employee + " saved");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
@@ -37,10 +38,10 @@ public class CustomerDaoImp implements CustomerDao{
     }
 
     @Override
-    public Customer readCustomer(String customerName) {
+    public Employee readEmployee(String employeeName) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
-        Customer customerToRead = new Customer();
+        Employee employeeToRead = null;
 
         try {
             emf = Persistence.createEntityManagerFactory("mypersistenceunit");
@@ -48,13 +49,13 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            Query query = em.createQuery("SELECT c FROM Customer AS c WHERE c.customerName LIKE ?1");
-            query.setParameter(1, customerName);
-            Stream<Customer> results = query.getResultStream();
-            customerToRead = results.findFirst().get();
+            Query query = em.createQuery("SELECT e FROM Employee AS e WHERE e.firstName LIKE ?1");
+            query.setParameter(1, employeeName);
+            Stream<Employee> results = query.getResultStream();
+            employeeToRead = results.findFirst().get();
             transaction.commit();
 
-            System.out.println(customerToRead + " readed");
+            System.out.println(employeeToRead + " readed");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
@@ -66,14 +67,14 @@ public class CustomerDaoImp implements CustomerDao{
                 emf.close();
             }
         }
-        return customerToRead;
+        return employeeToRead;
     }
 
     @Override
-    public Customer readCustomer(int customerNumber) {
+    public Employee readEmployee(int employeeNumber) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
-        Customer customerToRead = new Customer();
+        Employee employeeToRead = new Employee();
 
         try {
             emf = Persistence.createEntityManagerFactory("mypersistenceunit");
@@ -81,10 +82,10 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            customerToRead = em.find(Customer.class,customerNumber);
+            employeeToRead = em.find(Employee.class,employeeNumber);
             transaction.commit();
 
-            System.out.println(customerToRead + " readed");
+            System.out.println(employeeToRead + " readed");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
@@ -96,14 +97,14 @@ public class CustomerDaoImp implements CustomerDao{
                 emf.close();
             }
         }
-        return customerToRead;
+        return employeeToRead;
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateEmployee(Employee employee) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
-        Customer customerToUpdate = null;
+        Employee employeeToUpdate = null;
 
         try {
             emf = Persistence.createEntityManagerFactory("mypersistenceunit");
@@ -111,22 +112,17 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            customerToUpdate = em.find(Customer.class,customer.getCustomerNumber());
-            customerToUpdate.setCustomerName(customer.getCustomerName());
-            customerToUpdate.setContactLastName(customer.getContactLastName());
-            customerToUpdate.setContactFirstName(customer.getContactFirstName());
-            customerToUpdate.setPhone(customer.getPhone());
-            customerToUpdate.setAddressLine1(customer.getAddressLine1());
-            customerToUpdate.setAddressLine2(customer.getAddressLine2());
-            customerToUpdate.setCity(customer.getCity());
-            customerToUpdate.setState(customer.getState());
-            customerToUpdate.setPostalCode(customer.getPostalCode());
-            customerToUpdate.setCountry(customer.getCountry());
-            customerToUpdate.setSalesRepEmployeeNumber(customer.getSalesRepEmployeeNumber());
-            customerToUpdate.setCreditLimit(customer.getCreditLimit());
+            employeeToUpdate = em.find(Employee.class,employee.getEmployeeNumber());
+            employeeToUpdate.setLastName(employee.getLastName());
+            employeeToUpdate.setFirstName(employee.getFirstName());
+            employeeToUpdate.setExtension(employee.getExtension());
+            employeeToUpdate.setEmail(employee.getEmail());
+            employeeToUpdate.setOfficeCode(employee.getOfficeCode());
+            employeeToUpdate.setReportsTo(employee.getReportsTo());
+            employeeToUpdate.setJobTitle(employee.getJobTitle());
             transaction.commit();
 
-            System.out.println(customerToUpdate + " updated");
+            System.out.println(employeeToUpdate + " updated");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
@@ -141,7 +137,7 @@ public class CustomerDaoImp implements CustomerDao{
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
+    public void deleteEmployee(Employee employee) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
 
@@ -151,11 +147,11 @@ public class CustomerDaoImp implements CustomerDao{
             EntityTransaction transaction = em.getTransaction();
 
             transaction.begin();
-            Customer customerToDelete = em.find(Customer.class,customer.getCustomerNumber());
-            em.remove(customerToDelete);
+            Employee employeeToDelete = em.find(Employee.class,employee.getEmployeeNumber());
+            em.remove(employeeToDelete);
             transaction.commit();
 
-            System.out.println(customerToDelete + " deleted");
+            System.out.println(employeeToDelete + " deleted");
 
         } catch (PersistenceException pex){
             pex.printStackTrace();
