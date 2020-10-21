@@ -1,7 +1,5 @@
 package be.intecbrussel.entities;
 
-import org.hibernate.criterion.Order;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,6 +7,9 @@ public class OrderDetailPK implements Serializable {
 
     private Product product;
     private Order order;
+
+    public OrderDetailPK() {
+    }
 
     public OrderDetailPK(Product product, Order order) {
         this.product = product;
@@ -22,6 +23,14 @@ public class OrderDetailPK implements Serializable {
         OrderDetailPK that = (OrderDetailPK) o;
         return Objects.equals(product, that.product) &&
                 Objects.equals(order, that.order);
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Order getOrder() {
+        return order;
     }
 
     @Override

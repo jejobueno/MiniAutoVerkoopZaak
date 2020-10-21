@@ -7,7 +7,7 @@ import be.intecbrussel.entities.Product;
 public interface OrderDetailsDao {
 
     void createOrderDetail(OrderDetail orderDetail);
-    OrderDetail readOrderDetail(Order order);
+    OrderDetail readOrderDetail(Order order,Product product);
     void updateOrderDetail(Product product);
     void deleteOrderDetail(OrderDetail orderDetail);
 

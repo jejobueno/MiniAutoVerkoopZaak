@@ -92,8 +92,8 @@ public class OrderDetail {
     @Override
     public String toString() {
         return "OrderDetail{" +
-                "orderNumber=" + order +
-                ", productCode=" + product +
+                "orderNumber=" + order.getOderNumber() +
+                ", productCode=" + product.getProductCode() +
                 ", quantityOrdered=" + quantityOrdered +
                 ", priceEach=" + priceEach +
                 ", orderLineNumber=" + orderLineNumber +

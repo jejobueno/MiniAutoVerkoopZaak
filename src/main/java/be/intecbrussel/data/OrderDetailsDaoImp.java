@@ -2,6 +2,7 @@ package be.intecbrussel.data;
 
 import be.intecbrussel.entities.Order;
 import be.intecbrussel.entities.OrderDetail;
+import be.intecbrussel.entities.OrderDetailPK;
 import be.intecbrussel.entities.Product;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class OrderDetailsDaoImp implements OrderDetailsDao{
     }
 
     @Override
-    public OrderDetail readOrderDetail(Order order) {
+    public OrderDetail readOrderDetail(Order order, Product product) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         OrderDetail orderDetailToRead = new OrderDetail();
@@ -24,8 +25,9 @@ public class OrderDetailsDaoImp implements OrderDetailsDao{
             em = emf.createEntityManager();
             EntityTransaction transaction = em.getTransaction();
 
+            OrderDetailPK orderDetailPK = new OrderDetailPK(product,order);
             transaction.begin();
-            orderDetailToRead = em.find(OrderDetail.class,order.getOderNumber());
+            orderDetailToRead = em.find(OrderDetail.class,orderDetailPK);
             transaction.commit();
 
             System.out.println(orderDetailToRead + " readed");
