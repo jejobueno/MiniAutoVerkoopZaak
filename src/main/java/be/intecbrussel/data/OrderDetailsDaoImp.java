@@ -1,11 +1,11 @@
 package be.intecbrussel.data;
 
-import be.intecbrussel.entities.Order;
-import be.intecbrussel.entities.OrderDetail;
-import be.intecbrussel.entities.OrderDetailPK;
-import be.intecbrussel.entities.Product;
+import be.intecbrussel.entities.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class OrderDetailsDaoImp implements OrderDetailsDao{
 
@@ -51,6 +51,40 @@ public class OrderDetailsDaoImp implements OrderDetailsDao{
             OrderDetailPK orderDetailPK = new OrderDetailPK(product,order);
             transaction.begin();
             orderDetailToRead = em.find(OrderDetail.class,orderDetailPK);
+            transaction.commit();
+
+            System.out.println(orderDetailToRead + " readed");
+
+        } catch (PersistenceException pex){
+            pex.printStackTrace();
+        } finally {
+            if (em != null){
+                em.close();
+            }
+            if (emf != null){
+                emf.close();
+            }
+        }
+        return orderDetailToRead;
+    }
+
+    @Override
+    public List<OrderDetail> readOrderDetailByOrder(Order order) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        List<OrderDetail> orderDetailToRead = new ArrayList<>();
+
+        try {
+            emf = Persistence.createEntityManagerFactory("mypersistenceunit");
+            em = emf.createEntityManager();
+            EntityTransaction transaction = em.getTransaction();
+
+            transaction.begin();
+
+            Query query = em.createQuery("SELECT od FROM OrderDetail AS od WHERE od.order.orderNumber LIKE " + order.getOderNumber());
+            //Stream<OrderDetail> results = query.getResultStream();
+            orderDetailToRead  = query.getResultList();
+            //results.forEach(System.out::println);
             transaction.commit();
 
             System.out.println(orderDetailToRead + " readed");
